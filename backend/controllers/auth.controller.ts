@@ -7,6 +7,8 @@ import { registerSchema, loginSchema } from "../config/validation";
 import logger from "../config/logger";
 
 // @route   POST /api/auth/register
+// @desc    Register a new user with email and password
+// @access  Public
 const register = async (req: Request, res: Response): Promise<void> => {
   try {
     const validation = registerSchema.safeParse(req.body);
@@ -36,6 +38,8 @@ const register = async (req: Request, res: Response): Promise<void> => {
 };
 
 // @route   POST /api/auth/login
+// @desc    Authenticate user and return access token with refresh token cookie
+// @access  Public
 const login = async (req: Request, res: Response): Promise<void> => {
   try {
     const validation = loginSchema.safeParse(req.body);
@@ -83,6 +87,8 @@ const login = async (req: Request, res: Response): Promise<void> => {
 };
 
 // @route   POST /api/auth/logout
+// @desc    Logout user and clear refresh token cookie
+// @access  Private
 const logout = async (req: Request, res: Response): Promise<void> => {
   try {
     logger.info(`User logged out: ${req.user?.email}`);
@@ -98,6 +104,8 @@ const logout = async (req: Request, res: Response): Promise<void> => {
 };
 
 // @route   GET /api/auth/sessions
+// @desc    Get all active sessions for the authenticated user
+// @access  Private
 const getSessions = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId = req.user?.id;
@@ -127,6 +135,8 @@ const getSessions = async (req: Request, res: Response): Promise<void> => {
 };
 
 // @route   POST /api/auth/refresh
+// @desc    Refresh access token using refresh token cookie
+// @access  Public
 const refresh = async (req: Request, res: Response): Promise<void> => {
   try {
     const refreshToken = req.cookies?.refreshToken;
