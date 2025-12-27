@@ -5,11 +5,15 @@ import {
   createSessionRecord,
   findActiveSessionById,
   findActiveSessionsByUserId,
+  deleteSessionById,
+  deleteSessionsByUserId,
 } from "../services/session.service";
 import {
   generateAccessToken,
   findRefreshTokenByHash,
   deleteRefreshTokenById,
+  deleteRefreshTokensBySessionId,
+  deleteRefreshTokensByUserId,
   hashRefreshToken,
   issueRefreshToken,
   clearRefreshTokenCookie,
@@ -132,18 +136,54 @@ const login = async (req: Request, res: Response): Promise<void> => {
 };
 
 // @route   POST /api/auth/logout
-// @desc    Logout user and clear refresh token cookie
+// @desc    Logout user - invalidate current session and refresh token
 // @access  Private
 const logout = async (req: Request, res: Response): Promise<void> => {
   try {
-    logger.info(`User logged out: ${req.user?.email}`);
+    const sessionId = req.user?.sessionId;
+
+    if (sessionId) {
+      // Delete refresh tokens for this session first (due to FK constraint)
+      await deleteRefreshTokensBySessionId(sessionId);
+      // Delete the session
+      await deleteSessionById(sessionId);
+    }
+
+    logger.info(`User logged out: ${req.user?.email} (Session: ${sessionId})`);
     clearRefreshTokenCookie(res);
     res.json({
       message: "Logout successful",
-      user: req.user,
     });
   } catch (error) {
     logger.error("Logout error:", error);
+    res.status(500).json({ message: "Server error during logout" });
+  }
+};
+
+// @route   POST /api/auth/logout-all
+// @desc    Logout user from all sessions - invalidate all sessions and refresh tokens
+// @access  Private
+const logoutAll = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const userId = req.user?.id;
+
+    if (!userId) {
+      res.status(401).json({ message: "User not found" });
+      return;
+    }
+
+    // Delete all refresh tokens for the user first (due to FK constraint)
+    await deleteRefreshTokensByUserId(userId);
+    // Delete all sessions for the user
+    await deleteSessionsByUserId(userId);
+
+    logger.info(`User logged out from all sessions: ${req.user?.email}`);
+    clearRefreshTokenCookie(res);
+    res.json({
+      message: "Logged out from all sessions successfully",
+    });
+  } catch (error) {
+    logger.error("Logout all error:", error);
     res.status(500).json({ message: "Server error during logout" });
   }
 };
@@ -245,4 +285,4 @@ const refresh = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export { register, login, logout, getSessions, refresh };
+export { register, login, logout, logoutAll, getSessions, refresh };
