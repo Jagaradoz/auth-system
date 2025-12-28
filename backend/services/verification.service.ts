@@ -2,10 +2,7 @@ import crypto from "crypto";
 import { dbRun, dbGet } from "../config/db";
 import { VerificationToken } from "../types";
 
-const VERIFICATION_TOKEN_EXPIRY_HOURS = parseInt(
-  process.env.VERIFICATION_TOKEN_EXPIRY_HOURS || "24",
-  10,
-);
+const VERIFICATION_TOKEN_EXPIRY_HOURS = parseInt(process.env.VERIFICATION_TOKEN_EXPIRY_HOURS!, 10);
 
 /** Hash verification token using SHA-256 */
 const hashVerificationToken = (token: string): string => {

@@ -29,7 +29,7 @@ import { sendVerificationEmail } from "../services/email.service";
 import { registerSchema, loginSchema } from "../config/validation";
 import logger from "../config/logger";
 
-const SESSION_EXPIRY_DAYS = parseInt(process.env.SESSION_EXPIRY_DAYS || "7", 10);
+const SESSION_EXPIRY_DAYS = parseInt(process.env.SESSION_EXPIRY_DAYS!, 10);
 
 // @route   POST /api/auth/register
 // @desc    Register a new user with email and password
@@ -309,7 +309,7 @@ const verifyEmail = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    // Hash the token and find in database
+    // Find token hash in database
     const tokenHash = hashVerificationToken(token);
     const storedToken = await findVerificationTokenByHash(tokenHash);
 

@@ -1,7 +1,7 @@
 import transporter from "../config/email";
 import logger from "../config/logger";
 
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+const FRONTEND_URL = process.env.FRONTEND_URL!;
 
 /** Send verification email to user */
 const sendVerificationEmail = async (email: string, token: string): Promise<boolean> => {
@@ -9,7 +9,7 @@ const sendVerificationEmail = async (email: string, token: string): Promise<bool
 
   try {
     await transporter.sendMail({
-      from: process.env.SMTP_FROM || '"Auth Platform" <noreply@authplatform.com>',
+      from: process.env.SMTP_FROM,
       to: email,
       subject: "Verify your email - Auth Platform",
       html: `
