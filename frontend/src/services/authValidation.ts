@@ -1,4 +1,5 @@
-import type { RegisterFormData, LoginFormData, ValidationErrors, ValidationResult } from "../types";
+import type { RegisterFormData, LoginFormData } from "../types/forms";
+import type { ValidationErrors, ValidationResult } from "../types/validation";
 
 const strengthLabels: string[] = ["Very Weak", "Weak", "Fair", "Good", "Strong"];
 const strengthColors: string[] = ["#ef4444", "#f97316", "#eab308", "#22c55e", "#10b981"];

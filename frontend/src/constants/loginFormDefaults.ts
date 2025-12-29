@@ -1,10 +1,6 @@
-import type { LoginFormData, ValidationErrors } from "../types";
-
-// Feedback state type
-interface FeedbackState {
-  type: "success" | "error" | null;
-  message: string;
-}
+import type { LoginFormData } from "../types/forms";
+import type { ValidationErrors } from "../types/validation";
+import type { FeedbackState } from "../types/ui";
 
 // Login form state
 const initialFormState: LoginFormData = {
@@ -25,5 +21,4 @@ const initialFeedbackState: FeedbackState = {
 };
 
 // Exports
-export type { FeedbackState };
 export { initialFormState, initialErrorState, initialFeedbackState };

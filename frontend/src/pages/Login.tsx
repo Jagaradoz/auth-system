@@ -8,14 +8,12 @@ import Footer from "../components/login/Footer";
 import Form from "../components/login/Form";
 
 // Constants
-import {
-  initialFormState,
-  initialFeedbackState,
-  FeedbackState,
-} from "../constants/loginFormDefaults";
+import { initialFormState, initialFeedbackState } from "../constants/loginFormDefaults";
 
 // Types
-import type { LoginFormData, ApiError } from "../types";
+import type { LoginFormData } from "../types/forms";
+import type { ApiError } from "../types/api";
+import type { FeedbackState } from "../types/ui";
 
 const Login = () => {
   // Hooks

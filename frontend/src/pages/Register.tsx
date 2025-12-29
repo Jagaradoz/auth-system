@@ -8,18 +8,20 @@ import Footer from "../components/register/Footer";
 import Form from "../components/register/Form";
 
 // Utils
-import { validateField } from "../utils/authValidation";
+import { validateField } from "../services/authValidation";
 
 // Constants
 import {
   initialFormState,
   initialErrorState,
   initialFeedbackState,
-  FeedbackState,
 } from "../constants/registerFormDefaults";
 
 // Types
-import type { RegisterFormData, ValidationErrors, ApiError } from "../types";
+import type { RegisterFormData } from "../types/forms";
+import type { ValidationErrors } from "../types/validation";
+import type { ApiError } from "../types/api";
+import type { FeedbackState } from "../types/ui";
 
 const Register = () => {
   // Hooks

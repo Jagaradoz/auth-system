@@ -1,16 +1,7 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState } from "react";
 import { Eye, EyeOff, Loader2, CheckCircle, AlertCircle, Check, X } from "lucide-react";
-import type { RegisterFormData, ValidationErrors } from "../../types";
-import type { FeedbackState } from "../../constants/registerFormDefaults";
-
-interface RegisterFormProps {
-  formData: RegisterFormData;
-  errors: ValidationErrors;
-  isLoading: boolean;
-  feedback: FeedbackState;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}
+import type { RegisterFormData } from "../../types/forms";
+import type { RegisterFormProps } from "../../types/forms";
 
 const RegisterForm = ({
   formData,

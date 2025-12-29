@@ -1,15 +1,6 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState } from "react";
 import { Eye, EyeOff, Loader2, AlertCircle } from "lucide-react";
-import type { LoginFormData } from "../../types";
-import type { FeedbackState } from "../../constants/loginFormDefaults";
-
-interface LoginFormProps {
-  formData: LoginFormData;
-  isLoading: boolean;
-  feedback: FeedbackState;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}
+import type { LoginFormProps } from "../../types/forms";
 
 const LoginForm = ({ formData, isLoading, feedback, onSubmit, onChange }: LoginFormProps) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
