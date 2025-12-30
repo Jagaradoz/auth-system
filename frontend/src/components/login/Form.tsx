@@ -1,5 +1,6 @@
 // Reacts
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // Icons
 import { Eye, EyeOff, Loader2, AlertCircle } from "lucide-react";
@@ -56,19 +57,15 @@ const LoginForm = ({ formData, isLoading, feedback, onSubmit, onChange }: LoginF
           </div>
         </div>
 
-        {/* Remember Me */}
-        <div className="mb-3">
-          <div className="form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="rememberMe"
-              disabled={isLoading}
-            />
-            <label className="form-check-label" htmlFor="rememberMe">
-              Remember me
-            </label>
-          </div>
+        {/* Forgot Password */}
+        <div className="text-end mb-3">
+          <Link
+            to="/forgot-password"
+            className="text-decoration-none small"
+            style={{ color: "#7c3aed" }}
+          >
+            Forgot Password?
+          </Link>
         </div>
 
         {/* Error Message */}
