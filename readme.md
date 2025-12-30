@@ -1,6 +1,6 @@
-# Auth Platform
+# Auth System
 
-A full-stack authentication platform implementing secure JWT-based authentication, including login, registration, and token refresh. It provides robust session management with the ability to view active sessions, log out individual devices, or revoke access across all devices. The system also includes email verification to ensure account integrity and security.
+A full-stack authentication system implementing secure JWT-based authentication, including login, registration, and token refresh. It provides robust session management with the ability to view active sessions, log out individual devices, or revoke access across all devices. The system also includes email verification to ensure account integrity and security.
 
 ### Backend Techs
 - Node JS
