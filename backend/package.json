@@ -4,7 +4,8 @@
   "description": "Auth system backend with TypeScript",
   "main": "dist/app/server.js",
   "scripts": {
-    "start": "tsc && node dist/app/server.js",
+    "build": "tsc",
+    "start": "node dist/app/server.js",
     "dev": "nodemon --exec ts-node app/server.ts",
     "env": "ts-node app/env.ts",
     "typecheck": "tsc --noEmit"
