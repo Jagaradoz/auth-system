@@ -1,5 +1,5 @@
 import { dbRun, dbGet } from "../config/db";
-import { User } from "../types";
+import { User } from "../types/user";
 
 /** Find user by ID */
 const findUserById = async (id: number): Promise<User | undefined> => {
@@ -13,11 +13,16 @@ const findUserByEmail = async (email: string): Promise<User | undefined> => {
 
 /** Create a new user and return the user ID */
 const createUser = async (email: string, passwordHash: string): Promise<number> => {
-  const result = await dbRun("INSERT INTO users (email, password_hash) VALUES (?, ?)", [
+  const result = await dbRun("INSERT INTO users (email, password) VALUES (?, ?)", [
     email,
     passwordHash,
   ]);
   return result.lastID;
 };
 
-export { findUserById, findUserByEmail, createUser };
+/** Update user password */
+const updateUserPassword = async (userId: number, passwordHash: string): Promise<void> => {
+  await dbRun("UPDATE users SET password = ? WHERE id = ?", [passwordHash, userId]);
+};
+
+export { findUserById, findUserByEmail, createUser, updateUserPassword };
